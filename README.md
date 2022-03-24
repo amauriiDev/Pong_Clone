@@ -1,2 +1,2 @@
-# Pong_Clone
+# Clone_Pac_Man
  
