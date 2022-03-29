@@ -21,7 +21,7 @@ public class Master : MonoBehaviour
 
     public GameController gameController {get; private set;}
 
-    private void Start() {
+    void Start() {
         gameController = GetComponentInChildren<GameController>();
     }
 }

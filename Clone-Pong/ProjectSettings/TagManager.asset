@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WallScoreLeft
   - WallScoreRight
+  - Ball
   layers:
   - Default
   - TransparentFX

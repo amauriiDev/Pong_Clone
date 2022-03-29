@@ -42,7 +42,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""504e80ad-cfa9-42b7-9666-08e3d7318e80"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -53,7 +53,7 @@ public class @Inputs : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""423bab11-34c7-471e-8915-632e902560e6"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -71,16 +71,16 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""2961502e-827e-4a07-b196-357e3719aa84"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""a3fb8473-a48f-43e6-bb85-3359be08d620"",
-                    ""path"": ""1DAxis"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""8dc77a83-5fd8-428a-88bd-8457b7992657"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -89,9 +89,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""5b446032-8f72-4f5b-9b5e-7363f8b4ec35"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""name"": ""up"",
+                    ""id"": ""f0b7dfd1-aa0f-4a1b-890d-900c451fdbaa"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -100,9 +100,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""806191fb-d79a-4e0c-b3b5-e3db52abaed2"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""down"",
+                    ""id"": ""a0401ad3-25da-4bab-a5eb-6a9e37372333"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
