@@ -20,8 +20,10 @@ public class Master : MonoBehaviour
     #endregion
 
     public GameController gameController {get; private set;}
+    public AudioController audioController {get; private set;}
 
     void Start() {
         gameController = GetComponentInChildren<GameController>();
+        audioController = GetComponentInChildren<AudioController>();
     }
 }

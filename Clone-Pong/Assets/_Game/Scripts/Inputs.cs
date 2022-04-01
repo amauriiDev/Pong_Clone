@@ -25,6 +25,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""98f85ee4-d805-4410-87e9-a733109a1698"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -60,6 +68,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""669a97cc-3acd-4851-bfef-ca67e4827085"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -118,6 +137,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
+        m_Player1_PauseGame = m_Player1.FindAction("PauseGame", throwIfNotFound: true);
         // Player2
         m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
         m_Player2_Move = m_Player2.FindAction("Move", throwIfNotFound: true);
@@ -171,11 +191,13 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player1;
     private IPlayer1Actions m_Player1ActionsCallbackInterface;
     private readonly InputAction m_Player1_Move;
+    private readonly InputAction m_Player1_PauseGame;
     public struct Player1Actions
     {
         private @Inputs m_Wrapper;
         public Player1Actions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player1_Move;
+        public InputAction @PauseGame => m_Wrapper.m_Player1_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -188,6 +210,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnMove;
+                @PauseGame.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -195,6 +220,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -235,6 +263,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
     public interface IPlayer2Actions
     {

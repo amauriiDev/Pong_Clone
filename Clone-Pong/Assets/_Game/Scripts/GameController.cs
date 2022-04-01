@@ -13,8 +13,20 @@ public class GameController : MonoBehaviour
     public Text leftScoreTxt;
     public Text rightScoreTxt;
 
-    private void Awake()
+    public Sprite[] imgSongs;
+    public Sprite[] imgBGMusic;
+
+
+    public Slider sldVolume;
+    public GameObject pnlConfig;
+    public GameObject pnlMainMenu;
+
+    private void Start()
     {
+        if ((SceneManager.GetActiveScene().buildIndex) == 0)
+        {
+            sldVolume.value = PlayerPrefs.GetFloat("Volume");
+        }
         if ((SceneManager.GetActiveScene().buildIndex) == 1)
         {
 
@@ -24,7 +36,9 @@ public class GameController : MonoBehaviour
 
             UpdateScore();
         }
+
     }
+    
 
     public void AddScore(int sideIndex)
     {
@@ -63,13 +77,61 @@ public class GameController : MonoBehaviour
         currentBall = Instantiate(ball, Vector3.forward, Quaternion.identity);
     }
 
+    //Carregar cena passada por parâmetro
     public void SceneLoad(string name)
     {
         SceneManager.LoadScene(name);
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+        AudioListener.pause = true;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+        AudioListener.pause = false;
+    }
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetBGAudio(Image img)
+    {
+        if (Master.Instance.audioController.backgroundMusic.mute)
+        {
+            img.sprite = imgBGMusic[1];
+        }
+        else
+        {
+             Debug.Log("Desmutado");
+            img.sprite = imgBGMusic[0];
+        }
+    }
+    public void SetSFXAudio(Image img)
+    {
+
+        if (Master.Instance.audioController.audioSourceSfx.mute)
+        {
+            img.sprite = imgSongs[1];
+        }
+        else
+        {
+            img.sprite = imgSongs[0];
+        }
+    }
+
+    public void SetActivePanel(string name)
+    {
+        pnlConfig.SetActive(false);
+        pnlMainMenu.SetActive(false);
+
+        if (name == "config")
+            pnlConfig.SetActive(true);
+
+        if (name == "menu")
+            pnlMainMenu.SetActive(true);
     }
 }
