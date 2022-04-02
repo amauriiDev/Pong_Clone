@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private bool ismoving = false;
     private Vector2 inputVector;
 
+    public AudioClip hit;
+
     void FixedUpdate()
     {
         //Verificação 
@@ -29,6 +31,13 @@ public class PlayerController : MonoBehaviour
         if (context.canceled)
             ismoving = false;
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            Master.Instance.audioController.TocarSfx(hit);
+        }
     }
 
 }

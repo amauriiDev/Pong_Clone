@@ -13,19 +13,26 @@ public class GameController : MonoBehaviour
     public Text leftScoreTxt;
     public Text rightScoreTxt;
 
+    public Image imgSong;
+    public Image imgBGMusic;
     public Sprite[] imgSongs;
-    public Sprite[] imgBGMusic;
+    public Sprite[] imgBGMusics;
 
 
     public Slider sldVolume;
     public GameObject pnlConfig;
     public GameObject pnlMainMenu;
+    public GameObject pnlPause;
+
+    public AudioClip scoreSfx;
 
     private void Start()
     {
         if ((SceneManager.GetActiveScene().buildIndex) == 0)
         {
             sldVolume.value = PlayerPrefs.GetFloat("Volume");
+            SetSFXAudio();
+            SetBGAudio();
         }
         if ((SceneManager.GetActiveScene().buildIndex) == 1)
         {
@@ -35,16 +42,17 @@ public class GameController : MonoBehaviour
             rightScore = 0;
 
             UpdateScore();
+            ResumeGame();
         }
-
     }
-    
+
 
     public void AddScore(int sideIndex)
     {
         //sideIndex = 0 -> Lado Esquerdo(left)
         //sideIndex = 1 -> Lado Direito(right)
 
+        Master.Instance.audioController.TocarSfx(scoreSfx);
         if (sideIndex == 0)
         {
             leftScore += 1;
@@ -85,11 +93,13 @@ public class GameController : MonoBehaviour
 
     public void PauseGame()
     {
+        pnlPause.SetActive(true);
         Time.timeScale = 0.0f;
         AudioListener.pause = true;
     }
     public void ResumeGame()
     {
+        pnlPause.SetActive(false);
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
     }
@@ -98,29 +108,29 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetBGAudio(Image img)
+    public void SetBGAudio()
     {
-        if (Master.Instance.audioController.backgroundMusic.mute)
-        {
-            img.sprite = imgBGMusic[1];
-        }
-        else
-        {
-             Debug.Log("Desmutado");
-            img.sprite = imgBGMusic[0];
-        }
+        imgBGMusic.sprite = imgBGMusics[PlayerPrefs.GetInt("BGMusic")];
+        // if (Master.Instance.audioController.backgroundMusic.mute)
+        // {
+        //     imgBGMusic.sprite = imgBGMusics[1];
+        // }
+        // else
+        // {
+        //     imgBGMusic.sprite = imgBGMusics[0];
+        // }
     }
-    public void SetSFXAudio(Image img)
+    public void SetSFXAudio()
     {
-
-        if (Master.Instance.audioController.audioSourceSfx.mute)
-        {
-            img.sprite = imgSongs[1];
-        }
-        else
-        {
-            img.sprite = imgSongs[0];
-        }
+        imgSong.sprite = imgSongs[PlayerPrefs.GetInt("Sfx")];
+        // if (Master.Instance.audioController.audioSourceSfx.mute)
+        // {
+        //     imgSong.sprite = imgSongs[1];
+        // }
+        // else
+        // {
+        //     imgSong.sprite = imgSongs[0];
+        // }
     }
 
     public void SetActivePanel(string name)
